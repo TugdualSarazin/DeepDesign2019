@@ -8,7 +8,8 @@ import scipy.misc
 from sklearn.cluster import KMeans
 
 import Model
-import Parser
+from OutputPath import OutputPath
+from Parser import Parser
 
 
 '''
@@ -226,7 +227,7 @@ def  main(args):
     # read images and preprocess
     if args.content_img:
         content_img = read_image(args.content_img, args.hard_width) 
-    style_img = read_image(args.style_img, args.hard_width) 
+    style_img = read_image(args.style_img, args.hard_width)
 
     # get stacked 0./1. masks
     if args.mask_n_colors > 1: # colorful
@@ -360,14 +361,16 @@ def  main(args):
     print('Iteration %d: loss = %f' % (args.iteration, sess.run(total_loss)))
     result = sess.run(target_net['input'])
     #output_path = os.path.join(args.output_dir, 'result_final.png')
-    output_path = os.path.join(args.output_dir, os.path.split(os.path.splitext(args.content_img)[0])[1]+'2'+os.path.split(os.path.splitext(args.style_img)[0])[1]+ '.png')
+    #output_path = os.path.join(args.output_dir, os.path.split(os.path.splitext(args.content_img)[0])[1]+'2'+os.path.split(os.path.splitext(args.style_img)[0])[1]+ '.png')
+    output_path = OutputPath.path(args)
     #import pdb
     #pdb.set_trace()
     write_image(output_path, result)
 
 
 if __name__ == '__main__':   
-    args = Parser.parse_args()
+    #args = Parser.parse_args()
+    args = Parser().parse_args()
     main(args)
 
 
