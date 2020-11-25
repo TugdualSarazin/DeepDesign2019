@@ -217,10 +217,9 @@ def sum_total_variation_loss(input, shape):
 
 
 '''
-    main
+    run
 '''
-def  main(args):
-
+def  run(args, vgg_weights):
     '''
     init 
     '''  
@@ -270,9 +269,6 @@ def  main(args):
     '''
     compute features & build net
     '''
-    # prepare model weights
-    vgg_weights = Model.prepare_model(args.model_path)
-
     # feature maps of specific layers
     if args.content_img:
         content_features = compute_features(vgg_weights, args.feature_pooling_type, 
@@ -366,6 +362,12 @@ def  main(args):
     #pdb.set_trace()
     Output(args).save_result(result)
     #write_image(output_path, result)
+
+def main(args):
+    # Load model
+    vgg_weights = Model.prepare_model(args.model_path)
+
+    run(args, vgg_weights)
 
 
 if __name__ == '__main__':   
