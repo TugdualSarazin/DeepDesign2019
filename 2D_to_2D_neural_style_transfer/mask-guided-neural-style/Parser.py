@@ -71,11 +71,15 @@ class Parser():
                         help='How to normalize a masked gram matrix')
 
     parser.add_argument('--content_weight', type=float,
-                        default=1.,
+                        action='append',
+                        required=True,
+                        #default=[1.],
                         help='Content loss weight')
 
     parser.add_argument('--style_weight', type=float,
-                        default=0.2,
+                        action='append',
+                        required=True,
+                        #default=[0.2],
                         help='Style loss weight')
 
     parser.add_argument('--tv_weight', type=float,
@@ -92,7 +96,8 @@ class Parser():
                         help='learning rate for adam optimizer')
 
     parser.add_argument('--iteration', type=int,
-                        default=1000,
+                        action='append',
+                        required=True,
                         help='max iterations of training')
 
     # 10 is good for l-bfgs interface?

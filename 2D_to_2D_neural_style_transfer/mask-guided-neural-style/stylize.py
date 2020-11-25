@@ -1,3 +1,4 @@
+import itertools
 import os
 # os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
 # os.environ["CUDA_VISIBLE_DEVICES"]="1"
@@ -389,17 +390,20 @@ def main(args):
     # Load model
     vgg_weights = Model.prepare_model(args.model_path)
 
-    # Run style transfert
-    run(
-        args=args,
-        vgg_weights=vgg_weights,
-        content_weight=args.content_weight,
-        style_weight=args.style_weight,
-        iteration=args.iteration
-    )
+    # Run style transfer
+    for content_weight, style_weight, iteration in itertools.product(args.content_weight,
+                                                                     args.style_weight,
+                                                                     args.iteration):
+        #print(content_weight, style_weight, iteration)
+        run(
+            args=args,
+            vgg_weights=vgg_weights,
+            content_weight=content_weight,
+            style_weight=style_weight,
+            iteration=iteration
+        )
 
 
 if __name__ == '__main__':
-    # args = Parser.parse_args()
     args = Parser().parse_args()
     main(args)
