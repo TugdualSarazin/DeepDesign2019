@@ -8,7 +8,7 @@ import scipy.misc
 from sklearn.cluster import KMeans
 
 import Model
-from OutputPath import OutputPath
+from Output import Output
 from Parser import Parser
 
 
@@ -318,8 +318,8 @@ def  main(args):
     '''
     train 
     '''
-    if not os.path.exists(args.output_dir):
-        os.mkdir(args.output_dir)
+    # if not os.path.exists(args.output_dir):
+    #     os.mkdir(args.output_dir)
 
     if args.optimizer == 'adam':
         optimizer = tf.train.AdamOptimizer(args.learning_rate)
@@ -362,10 +362,10 @@ def  main(args):
     result = sess.run(target_net['input'])
     #output_path = os.path.join(args.output_dir, 'result_final.png')
     #output_path = os.path.join(args.output_dir, os.path.split(os.path.splitext(args.content_img)[0])[1]+'2'+os.path.split(os.path.splitext(args.style_img)[0])[1]+ '.png')
-    output_path = OutputPath.path(args)
     #import pdb
     #pdb.set_trace()
-    write_image(output_path, result)
+    Output(args).save_result(result)
+    #write_image(output_path, result)
 
 
 if __name__ == '__main__':   
