@@ -10,7 +10,7 @@ class Output:
         self.content_weight = content_weight
         self.style_weight = style_weight
         self.iteration = iteration
-        self.hard_with = int(args.hard_width)
+        self.hard_width = int(args.hard_width)
 
     def path(self):
         file_name = '{content_img}-w{content_weight}_TO_{style_img}-w{style_weight}_iter{iteration}_res{res}.png'.format(
