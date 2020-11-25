@@ -5,17 +5,21 @@ import numpy as np
 
 class Output:
     args = None
-    def __init__(self, args):
+    def __init__(self, args, content_weight, style_weight, iteration):
         self.args = args
+        self.content_weight = content_weight
+        self.style_weight = style_weight
+        self.iteration = iteration
+        self.hard_with = int(args.hard_width)
 
     def path(self):
         file_name = '{content_img}-w{content_weight}_TO_{style_img}-w{style_weight}_iter{iteration}_res{res}.png'.format(
             content_img=os.path.split(os.path.splitext(self.args.content_img)[0])[1],
-            content_weight=int(self.args.content_weight),
+            content_weight=self.content_weight,
             style_img=os.path.split(os.path.splitext(self.args.style_img)[0])[1],
-            style_weight=int(self.args.style_weight),
-            iteration=self.args.iteration,
-            res=self.args.hard_width
+            style_weight=self.style_weight,
+            iteration=self.iteration,
+            res=self.hard_width
         )
         return os.path.join(self.args.output_dir, file_name)
 

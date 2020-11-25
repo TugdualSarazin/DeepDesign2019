@@ -21,5 +21,6 @@ python stylize.py \
      --hard_width=$IMAGE_SIZE \
      --iteration ${NUM_ITERS} \
      --style_weight ${STYLE_WEIGHT} \
-     --content_weight ${CONTENT_WEIGHT} 
+     --content_weight ${CONTENT_WEIGHT} \
+     --output_dir ${OUTPUT_DIR}
 

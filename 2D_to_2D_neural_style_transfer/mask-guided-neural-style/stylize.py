@@ -382,7 +382,7 @@ def run(args, vgg_weights, content_weight, style_weight, iteration):
     # output_path = os.path.join(args.output_dir, os.path.split(os.path.splitext(args.content_img)[0])[1]+'2'+os.path.split(os.path.splitext(args.style_img)[0])[1]+ '.png')
     # import pdb
     # pdb.set_trace()
-    Output(args).save_result(result)
+    Output(args, content_weight, style_weight, iteration).save_result(result)
     # write_image(output_path, result)
 
 
